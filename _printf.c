@@ -4,6 +4,8 @@
 /**
  * _printf - Custom printf function
  * @format: Format string
+ *
+ * Return: The number of characters printed
  */
 int _printf(const char *format, ...)
 {
