@@ -9,8 +9,7 @@
  */
 int _printf(const char *format, ...)
 {
-	unsigned int j;
-	int i;
+	unsigned int j, i, count;
 	va_list args;
 
 	op_t type[] = {
@@ -19,33 +18,49 @@ int _printf(const char *format, ...)
 		{"i", print_i},
 		{"d", print_d},
 		{"b", print_b},
-		{"%", print_percent}
+		{"%", print_percent},
+		{NULL, NULL}
 	};
 
 	va_start(args, format);
+	if (format == NULL)
+	{
+		va_end(args);
+		return (-1);
+	}
 
 	i = 0;
-	while (format != NULL && format[i] != '\0')
+	count = 0;
+	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			for (j = 0; j < sizeof(type) / sizeof(type[0]); j++)
+			if (format[i] == '\0')
+				break;
+			j = 0;
+			while (type[j].op && format[i] != *(type[j].op))
+				j++;
+			if (type[j].op)
 			{
-				if (format[i] == *(type[j].op))
-				{
-					type[j].f(args);
-					break;
-				}
+				type[j].f(args);
+				count++;
+			}
+			else
+			{
+				_putchar('%');
+				_putchar(format[i]);
+				count += 2;
 			}
 		}
 		else
 		{
 			_putchar(format[i]);
+			count++;
 		}
 		i++;
 	}
-
 	va_end(args);
-	return (0);
+	return (count);
 }
+

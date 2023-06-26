@@ -28,13 +28,27 @@ void print_s(va_list args)
 {
 	char *s;
 	int i;
+	char *null_str = "(null)";
 
 	s = va_arg(args, char*);
-	i = 0;
-	while (s[i] != '\0')
+
+	if (s == NULL)
 	{
-		_putchar(s[i]);
-		i++;
+		i = 0;
+		while (null_str[i] != '\0')
+		{
+			_putchar(null_str[i]);
+			i++;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (s[i] != '\0')
+		{
+			_putchar(s[i]);
+			i++;
+		}
 	}
 }
 
@@ -50,17 +64,32 @@ void print_s(va_list args)
 void print_i(va_list args)
 {
 	int i;
-	char buffer[20]; /* Buffer to hold the converted integer as string */
+	char buffer[21];
 	int j;
+	int is_negative;
 
 	i = va_arg(args, int);
-	sprintf(buffer, "%d", i); /* Convert integer to string */
+
 	j = 0;
-	while (buffer[j] != '\0')
+	is_negative = 0;
+
+	if (i < 0)
 	{
-		_putchar(buffer[j]);
-		j++;
+		_putchar('-');
+		is_negative = 1;
+		i = -i;
 	}
+
+	do {
+		buffer[j++] = '0' + (i % 10);
+		i /= 10;
+	} while (i != 0);
+
+	if (is_negative)
+		j++;
+
+	while (j > 0)
+		_putchar(buffer[--j]);
 }
 
 /**
@@ -75,18 +104,34 @@ void print_i(va_list args)
 void print_d(va_list args)
 {
 	int d;
-	char buffer[20]; /* Buffer to hold the converted decimal as string */
+	char buffer[21];
 	int j;
+	int is_negative;
 
 	d = va_arg(args, int);
-	sprintf(buffer, "%d", d); /* Convert decimal to string */
+
 	j = 0;
-	while (buffer[j] != '\0')
+	is_negative = 0;
+
+	if (d < 0)
 	{
-		_putchar(buffer[j]);
-		j++;
+		_putchar('-');
+		is_negative = 1;
+		d = -d;
 	}
+
+	do {
+		buffer[j++] = '0' + (d % 10);
+		d /= 10;
+	} while (d != 0);
+
+	if (is_negative)
+		j++;
+
+	while (j > 0)
+		_putchar(buffer[--j]);
 }
+
 
 /**
  * print_percent - Prints a percentage character.
