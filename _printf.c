@@ -1,62 +1,49 @@
-#include <main.h>
+#include "main.h"
+
 
 /**
  * _printf - Custom printf function
- *
- * This function takes a format string and variable arguments, and prints
- * the formatted output to the standard output.
- *
- * @format: The format string specifying the format of the output.
- * @...: Additional variable arguments based on the format string.
- *
- * Return: The number of characters printed.
+ * @format: Format string
  */
-
 int _printf(const char *format, ...)
 {
-va_list args;
-va_start(args, format);
+	unsigned int j;
+	int i;
+	va_list args;
 
-int len = 0;
+	op_t type[] = {
+		{"c", print_c},
+		{"s", print_s},
+		{"i", print_i},
+		{"d", print_d},
+		{"b", print_b},
+		{"%", print_percent}
+	};
 
-	for (int i = 0; format[i] != '\0'; i++)
+	va_start(args, format);
+
+	i = 0;
+	while (format != NULL && format[i] != '\0')
 	{
-	if (format[i] == '%') {
-	i++;
-		if (format[i] == 'c') 
+		if (format[i] == '%')
 		{
-		char value = (char)va_arg(args, int);
-		_putchar(value);
-		len++;
-
+			i++;
+			for (j = 0; j < sizeof(type) / sizeof(type[0]); j++)
+			{
+				if (format[i] == *(type[j].op))
+				{
+					type[j].f(args);
+					break;
+				}
+			}
 		}
-
-		else if (format[i] == 's')
+		else
 		{
-		char *value = va_arg(args, char *);
-		while (*value != '\0')
-       		{
-		_putchar(*value);
-		len++;
-		value++;
+			_putchar(format[i]);
 		}
+		i++;
+	}
 
-} 
-else if (format[i] == '%') {
-_putchar('%');
-len++;
-} else {
-_putchar('%');
-_putchar(format[i]);
-len += 2;
-}
-} else {
-_putchar(format[i]);
-len++;
-}
-}
-
-va_end(args);
-
-return len;
+	va_end(args);
+	return (0);
 }
