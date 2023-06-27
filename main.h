@@ -8,18 +8,6 @@
 #include <stdlib.h>
 
 /**
- * _putchar - writes the character c to stdout
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
-/**
  * struct op - Represents an operation and its associated function.
  * @op: A pointer to a constant character string representing the operation.
  * @f: A function pointer to the function associated with the operation.
@@ -40,10 +28,8 @@ void print_c(va_list args);
 void print_s(va_list args);
 void print_i(va_list args);
 void print_d(va_list args);
+void print_b(va_list args);
 void print_percent(va_list args);
-
-
-
 
 
 #endif /*_PRINTF_H*/
