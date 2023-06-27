@@ -49,8 +49,15 @@ void printBinary(unsigned int num)
  */
 void print_b(va_list args)
 {
-	unsigned int num;
+    unsigned int num;
 
-	num = va_arg(args, unsigned int);
-	printBinary(num);
+    num = va_arg(args, unsigned int);
+
+    if (num == 0)
+    {
+        _putchar('0');
+        return;
+    }
+
+    printBinary(num);
 }
