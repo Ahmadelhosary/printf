@@ -61,10 +61,12 @@ void print_s(va_list args)
  * the sprintf() function,
  * and then using the _putchar() function to write each character of the string
  */
+#include "main.h"
+
 void print_i(va_list args)
 {
 	int i;
-	char buffer[21];
+	char buffer[12];
 	int j;
 	int is_negative;
 
@@ -73,14 +75,20 @@ void print_i(va_list args)
 	j = 0;
 	is_negative = 0;
 
-	if (i < 0)
+	if (i == 0)
+	{
+		_putchar('0');
+		return;
+	}
+	else if (i < 0)
 	{
 		_putchar('-');
 		is_negative = 1;
 		i = -i;
 	}
 
-	do {
+	do
+	{
 		buffer[j++] = '0' + (i % 10);
 		i /= 10;
 	} while (i != 0);
@@ -91,6 +99,8 @@ void print_i(va_list args)
 	while (j > 0)
 		_putchar(buffer[--j]);
 }
+
+
 
 /**
  * print_d - Prints a decimal.
@@ -113,11 +123,26 @@ void print_d(va_list args)
 	j = 0;
 	is_negative = 0;
 
-	if (d < 0)
+	if (d == 0)
 	{
-		_putchar('-');
-		is_negative = 1;
-		d = -d;
+		_putchar('0');
+		return;
+	}
+	else if (d < 0)
+	{
+		if (d == INT_MIN)
+		{
+			_putchar('-');
+			_putchar('2');
+			d %= 1000000000;
+			d = -d;
+		}
+		else
+		{
+			_putchar('-');
+			is_negative = 1;
+			d = -d;
+		}
 	}
 
 	do {
