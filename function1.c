@@ -66,7 +66,7 @@ void print_s(va_list args)
 void print_i(va_list args)
 {
 	int i;
-	char buffer[12];
+	char buffer[32];
 	int j;
 	int is_negative;
 
@@ -114,7 +114,7 @@ void print_i(va_list args)
 void print_d(va_list args)
 {
 	int d;
-	char buffer[21];
+	char buffer[32];
 	int j;
 	int is_negative;
 
