@@ -7,10 +7,34 @@
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
+
 int _putchar(char c)
 {
-	return (write(1, &c, 1));
+	static char buffer[BUFFER_SIZE];
+	static int index = 0;
+
+	if (index == BUFFER_SIZE)
+	{
+		if (write(1, buffer, BUFFER_SIZE) != BUFFER_SIZE)
+			return (-1);
+		index = 0;
+	}
+
+	buffer[index++] = c;
+
+	return (c);
 }
+
+void _flush_buffer(void)
+{
+	if (index > 0)
+	{
+		if (write(1, buffer, index) != index)
+			return;
+		index = 0;
+	}
+}
+
 
 /**
  * printBinary - Print an unsigned integer in binary format
