@@ -11,7 +11,9 @@
 int _putchar(char c)
 {
 	static char buffer[BUFFER_SIZE];
-	static int index = 0;
+	static int index;
+
+	index = 0;
 
 	if (index == BUFFER_SIZE)
 	{
