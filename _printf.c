@@ -13,12 +13,8 @@ int _printf(const char *format, ...)
 	va_list args;
 
 	op_t type[] = {
-		{"c", print_c},
-		{"s", print_s},
-		{"i", print_i},
-		{"d", print_d},
-		{"b", print_b},
-		{"%", print_percent},
+		{"c", print_c},{"s", print_s},{"i", print_i},
+		{"d", print_d},{"b", print_b},{"%", print_percent},
 		{NULL, NULL}
 	};
 
