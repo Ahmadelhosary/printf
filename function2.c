@@ -1,7 +1,8 @@
 #include "main.h"
 
 #define BUFFER_SIZE 1024
-
+int index;
+char buffer[BUFFER_SIZE];
 /**
  * _putchar - Writes the character c to stdout.
  * @c: The character to print.
@@ -12,8 +13,7 @@
 
 int _putchar(char c)
 {
-	char buffer[BUFFER_SIZE];
-	int index;
+
 
 	index = 0;
 
