@@ -1,5 +1,7 @@
 #include "main.h"
 
+#define BUFFER_SIZE 1024
+
 /**
  * _putchar - Writes the character c to stdout.
  * @c: The character to print.
