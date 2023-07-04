@@ -10,12 +10,17 @@ int _printf(const char *format, ...)
 {
 	unsigned int j, i, count;
 	va_list args;
+
 	op_t type[] = {
-		{"c", print_c}, {"s", print_s},
-		{"%", print_percent}, {NULL, NULL}
+		{"c", print_c}, {"s", print_s}, {"%", print_percent},
+		{NULL, NULL}
 	};
 	va_start(args, format);
-
+	if (format == NULL)
+	{
+		va_end(args);
+		return (-1);
+	}
 	i = 0, count = 0;
 	while (format[i] != '\0')
 	{
@@ -47,6 +52,5 @@ int _printf(const char *format, ...)
 		i++;
 	}
 	va_end(args);
-	_flush_buffer();
 	return (count);
 }
