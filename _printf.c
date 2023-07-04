@@ -11,8 +11,8 @@ int _printf(const char *format, ...)
 	unsigned int j, i, count;
 	va_list args;
 	op_t type[] = {
-		{"c", print_c}, {"s", print_s}, {"i", print_i}, {"d", print_d},
-		{"b", print_b}, {"%", print_percent}, {NULL, NULL}
+		{"c", print_c}, {"s", print_s},
+		{"%", print_percent}, {NULL, NULL}
 	};
 	va_start(args, format);
 
