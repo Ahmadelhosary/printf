@@ -32,6 +32,7 @@ void print_i(va_list args);
 void print_d(va_list args);
 void print_b(va_list args);
 void print_percent(va_list args);
+void _flush_buffer();
 
 
 #endif /*_PRINTF_H*/
