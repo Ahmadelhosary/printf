@@ -1,8 +1,6 @@
 #ifndef _PRINTF_H
 #define _PRINTF_H
 
-#define BUFFER_SIZE 1024
-
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
